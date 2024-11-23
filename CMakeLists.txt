@@ -16,4 +16,6 @@ add_executable(CTorch main.cpp
         Data/DataLoader.cpp
         Data/DataLoader.h
         Data/DataSet.cpp
-        Data/DataSet.h)
+        Data/DataSet.h
+        Layers/ReLU.cpp
+        Layers/ReLU.h)

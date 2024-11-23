@@ -2,15 +2,15 @@
 // Created by siyan on 2024/10/27.
 //
 
-#ifndef ADAM_H
-#define ADAM_H
+#ifndef RELU_H
+#define RELU_H
 
 
 
-class Adam {
+class ReLU {
 
 };
 
 
 
-#endif //ADAM_H
+#endif //RELU_H

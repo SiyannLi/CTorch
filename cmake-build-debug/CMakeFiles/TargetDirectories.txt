@@ -1,3 +1,0 @@
-C:/Users/siyan/iCloudDrive/Documents/TUM/Advanced Programming/CTorch/cmake-build-debug/CMakeFiles/CTorch.dir
-C:/Users/siyan/iCloudDrive/Documents/TUM/Advanced Programming/CTorch/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/siyan/iCloudDrive/Documents/TUM/Advanced Programming/CTorch/cmake-build-debug/CMakeFiles/rebuild_cache.dir
