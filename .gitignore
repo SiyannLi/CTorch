@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 .idea
 *.log
 *.iml
 *.ninja
 
+=======
+.idea
+*.log
+*.iml
+*.ninja
+cmake-build-debug
+
+>>>>>>> origin/siyan

@@ -1,6 +1,15 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    // 输入两个整形数字，输出他们的和
+    using namespace std;
+    int a;
+    int b;
+    cin >> a;
+    cin >> b;
+
+    int c = a + b;
+
+    cout << c;
     return 0;
 }

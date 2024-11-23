@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //
 // Created by siyan on 2024/10/27.
 //
@@ -50,3 +51,10 @@ std::vector<double> LinearLayer::forward(const std::vector<double>& input)
     output = weights_ * input + bias_;
 
 }
+=======
+//
+// Created by siyan on 2024/10/27.
+//
+
+#include "LinearLayer.h"
+>>>>>>> origin/siyan
