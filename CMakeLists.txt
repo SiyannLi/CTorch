@@ -1,9 +1,17 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.28)
 project(CTorch)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(CTorch main.cpp
+include_directories(
+        ${CMAKE_SOURCE_DIR}/DataType
+        ${CMAKE_SOURCE_DIR}/Data
+        ${CMAKE_SOURCE_DIR}/Optimizer
+        ${CMAKE_SOURCE_DIR}/Layers
+        ${CMAKE_SOURCE_DIR}/Eigen
+)
+
+add_executable(test test.cpp
         DataType/Tensor.cpp
         Layers/LinearLayer.cpp
         Layers/LinearLayer.h
@@ -17,5 +25,4 @@ add_executable(CTorch main.cpp
         Data/DataLoader.h
         Data/DataSet.cpp
         Data/DataSet.h
-        Layers/ReLU.cpp
-        Layers/ReLU.h)
+)
