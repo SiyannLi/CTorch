@@ -1,14 +1,11 @@
-<<<<<<< HEAD
-.idea
-*.log
-*.iml
-*.ninja
 
-=======
 .idea
 *.log
 *.iml
 *.ninja
 cmake-build-debug
-
->>>>>>> origin/siyan
+/eigen-3.4.0
+.vscode
+/Eigen
+/build
+.gitignore
