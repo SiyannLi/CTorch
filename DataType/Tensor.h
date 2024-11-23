@@ -6,13 +6,12 @@
 #define TENSOR_H
 
 #include <vector>
+#include <stdexcept>
 using namespace std;
 template<typename T>
 class Tensor {
 private:
-    vector<vector<T>> data;
-    vector<vector<T>> grad;
-    vector<int> dimensions;
+
 
     size_t rows() const { return data.size(); }
     size_t cols() const { return data.empty() ? 0 : data[0].size(); }
@@ -31,6 +30,7 @@ private:
 
 
 public:
+
     Tensor(const vector<vector<T>>& rawData) {
         data = rawData;
         grad = vector<vector<T>>(data.size(), vector<T>(data[0].size(), 0));
@@ -93,6 +93,11 @@ public:
     vector<T> gradient() {
         return this -> grad;
     }
+
+    
+    vector<vector<T>> data;
+    vector<vector<T>> grad;
+    vector<int> dimensions;
 
 };
 
