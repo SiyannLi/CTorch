@@ -52,7 +52,7 @@ public:
     /// @param input Input vector (Eigen::VectorXd)
     /// @return Gradient vector of the same size
     static Eigen::VectorXd gradient(const Eigen::VectorXd& input) {
-        Eigen::VectorXd sig = activate(input);
+        Eigen::VectorXd sig = sigmoid(input);
         return sig.array() * (1.0 - sig.array());
     }
 };

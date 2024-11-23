@@ -10,10 +10,11 @@
 #include <random>
 #include <cassert>
 #include <cmath>
-#include <activation.h>
+#include "activation.h"
+#include "model.h"
 #include "Tensor.h"
 
-class LinearLayer {
+class LinearLayer : public Model {
 public:
     /// @brief Constructor: initialize linear layer
     /// @param input_size 
@@ -24,22 +25,19 @@ public:
     /// 
     /// This function performs a linear transformation using the weights and biases of the layer:
     ///     output = weights * input + bias
-    /// It then applies the specified activation function (ReLU or Sigmoid) to the result.
     ///
     /// @param input Input vector of size input_size_. The size of the vector must match the layer's input dimension.
     /// @param activation Supported values are:
     ///                   - "relu": Apply the ReLU activation function.
     ///                   - "sigmoid": Apply the Sigmoid activation function.
-    ///                   If an unsupported activation is provided, the function throws an exception.
     ///
-    /// @return Output vector of size output_size_. This is the transformed input after applying
-    ///         the linear transformation and the specified activation function.
+    /// @return Output vector of size output_size_. 
     ///
     /// @throws std::invalid_argument if the input size does not match input_size_
     ///         or if the specified activation function is not supported.
     ///
     /// @note This function also saves the input vector for use during the backward pass (for gradient calculations).
-    Eigen::VectorXd forward(const Eigen::VectorXd& input, const std::string & activation);
+    Eigen::VectorXd forward(const Eigen::VectorXd& input, const std::string & activation = "sigmoid") override; 
 
     // Tensor backward(const Tensor& dout);
 
@@ -50,6 +48,11 @@ public:
     /// @brief Get bias' of layer
     /// @return Bias vector . Type Eigen::VectorXd
     Eigen::MatrixXd getBias();
+    
+    /// @brief print details of layers
+    void details() const override {
+        std::cout << "Linear Layer: Input size = " << input_size_ << ", Output size = " << output_size_ << std::endl;
+    }
 
 
 private:

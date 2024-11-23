@@ -73,7 +73,7 @@ Eigen::VectorXd LinearLayer::forward(const Eigen::VectorXd& input, const std::st
         return output_;
     }
     else{
-        throw std::invalid_argument("Unknown activation")
+        throw std::invalid_argument("Unknown activation");
     }
 
 

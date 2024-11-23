@@ -9,6 +9,7 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/Optimizer
         ${CMAKE_SOURCE_DIR}/Layers
         ${CMAKE_SOURCE_DIR}/Eigen
+        ${CMAKE_SOURCE_DIR}/
 )
 
 add_executable(test test.cpp
@@ -17,6 +18,8 @@ add_executable(test test.cpp
         Layers/LinearLayer.h
         Layers/ConvolutionLayer.cpp
         Layers/ConvolutionLayer.h
+        Layers/model.h
+        Layers/model.cpp
         Optimizer/Adam.cpp
         Optimizer/Adam.h
         DataType/Tensor.cpp
@@ -25,4 +28,6 @@ add_executable(test test.cpp
         Data/DataLoader.h
         Data/DataSet.cpp
         Data/DataSet.h
+        mymodel.h
+
 )
