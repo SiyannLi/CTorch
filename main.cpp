@@ -1,15 +1,12 @@
 #include <iostream>
+#include "Data/DataLoader.h"
+#include "Data/DataSet.h"
 
 int main() {
-    // 输入两个整形数字，输出他们的和
-    using namespace std;
-    int a;
-    int b;
-    cin >> a;
-    cin >> b;
 
-    int c = a + b;
-
-    cout << c;
+    DataSet minstdata;
+    minstdata.readMnistData();
+    std::vector<std::vector<double>> test_input = minstdata.getTestInput();
+    minstdata.printDigit(test_input[0],0);
     return 0;
 }

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 .idea
 *.log
 *.iml
@@ -8,12 +6,4 @@ cmake-build-debug
 /eigen-3.4.0
 .vscode
 /build
-=======
-.idea
-*.log
-*.iml
-*.ninja
-cmake-build-debug
 /Eigen/*
-
->>>>>>> siyan

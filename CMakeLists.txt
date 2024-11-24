@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/DataType
-<<<<<<< HEAD
         ${CMAKE_SOURCE_DIR}/Data
         ${CMAKE_SOURCE_DIR}/Optimizer
         ${CMAKE_SOURCE_DIR}/Layers
@@ -14,7 +13,6 @@ include_directories(
 )
 
 add_executable(test test.cpp
-=======
         ${CMAKE_SOURCE_DIR}/Layers
         ${CMAKE_SOURCE_DIR}/Optimizer
         ${CMAKE_SOURCE_DIR}/Data
@@ -23,8 +21,7 @@ add_executable(test test.cpp
 
 )
 
-add_executable(CTorch main.cpp
->>>>>>> siyan
+add_executable(CTorch test.cpp
         DataType/Tensor.cpp
         Layers/LinearLayer.cpp
         Layers/LinearLayer.h
@@ -40,14 +37,9 @@ add_executable(CTorch main.cpp
         Data/DataLoader.h
         Data/DataSet.cpp
         Data/DataSet.h
-<<<<<<< HEAD
         mymodel.h
-
-)
-=======
         Layers/ReLU.cpp
         Layers/ReLU.h
         Optimizer/Optimizer.h
         Layers/Module.h
         Function/LossFunction.h)
->>>>>>> siyan

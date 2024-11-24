@@ -89,4 +89,3 @@ Eigen::MatrixXd LinearLayer::getWeights(){return weights_;}
 
 Eigen::MatrixXd LinearLayer::getBias(){return bias_;}
 
-
