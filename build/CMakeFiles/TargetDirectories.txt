@@ -1,0 +1,3 @@
+/Users/liuyuheng/Downloads/CTorch/build/CMakeFiles/CTorch.dir
+/Users/liuyuheng/Downloads/CTorch/build/CMakeFiles/edit_cache.dir
+/Users/liuyuheng/Downloads/CTorch/build/CMakeFiles/rebuild_cache.dir
