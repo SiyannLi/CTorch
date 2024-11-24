@@ -7,7 +7,7 @@
 #define RELU_H
 
 #include <iostream>
-#include <Eigen>  // 包含 Eigen 库
+#include <Eigen>
 #include <cmath>
 
 class ReLU {

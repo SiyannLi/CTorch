@@ -6,22 +6,16 @@
 #define TENSOR_H
 
 #include <vector>
-<<<<<<< HEAD
 #include <stdexcept>
-=======
 #include "Eigen"
->>>>>>> siyan
 using namespace std;
 template<typename T>
 class Tensor {
 private:
-<<<<<<< HEAD
 
-=======
     vector<T> data;
     vector<T> grad;
     vector<int> dimensions;
->>>>>>> siyan
 
     size_t rows() const { return data.size(); }
     size_t cols() const { return data.empty() ? 0 : data[0].size(); }
@@ -38,20 +32,17 @@ private:
         return result;
     }
 
-<<<<<<< HEAD
 
 public:
 
     Tensor(const vector<vector<T>>& rawData) {
         data = rawData;
         grad = vector<vector<T>>(data.size(), vector<T>(data[0].size(), 0));
-=======
     void getDimensions(const T& vec, vector<size_t>& dims) {
         dims.push_back(vec.size());
         if (!vec.empty() && vec[0].size() > 0) {
             getDimensions(vec[0], dims);
         }
->>>>>>> siyan
     }
 
 

@@ -6,7 +6,7 @@
 #define LINEARLAYER_H
 
 #include <iostream>
-#include <Eigen>  // 包含 Eigen 库
+#include <Eigen>
 #include <random>
 #include <cassert>
 #include <cmath>

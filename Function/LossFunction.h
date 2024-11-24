@@ -5,8 +5,6 @@
 #ifndef LOSSFUNCTION_H
 #define LOSSFUNCTION_H
 class LossFunction {
-
-    LossFunction(){}
+    LossFunction(){};
 };
-
 #endif //LOSSFUNCTION_H

@@ -8,17 +8,8 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/Data
         ${CMAKE_SOURCE_DIR}/Optimizer
         ${CMAKE_SOURCE_DIR}/Layers
-        ${CMAKE_SOURCE_DIR}/Eigen
+#        ${CMAKE_SOURCE_DIR}/Eigen
         ${CMAKE_SOURCE_DIR}/
-)
-
-add_executable(test test.cpp
-        ${CMAKE_SOURCE_DIR}/Layers
-        ${CMAKE_SOURCE_DIR}/Optimizer
-        ${CMAKE_SOURCE_DIR}/Data
-        ${CMAKE_SOURCE_DIR}/Function
-        ${CMAKE_SOURCE_DIR}/Eigen
-
 )
 
 add_executable(CTorch test.cpp
@@ -38,8 +29,7 @@ add_executable(CTorch test.cpp
         Data/DataSet.cpp
         Data/DataSet.h
         mymodel.h
-        Layers/ReLU.cpp
-        Layers/ReLU.h
         Optimizer/Optimizer.h
         Layers/Module.h
+        Function/LossFunction.h
         Function/LossFunction.h)

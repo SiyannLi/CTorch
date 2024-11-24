@@ -6,20 +6,20 @@
 #include <Eigen/Dense>
 
 int main() {
-    // 初始化模型
+
     MyModel model;
 
-    // 打印模型结构
+
     model.details();
 
-    // 构造输入向量
+
     Eigen::VectorXd input(10);
     input.setRandom();
 
-    // 执行前向传播
+
     Eigen::VectorXd output = model.forward(input);
 
-    // 打印最终输出
+
     std::cout << "Final Output: " << output.transpose() << std::endl;
 
     return 0;
