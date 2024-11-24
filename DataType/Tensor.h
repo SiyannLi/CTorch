@@ -6,12 +6,13 @@
 #define TENSOR_H
 
 #include <vector>
+#include "Eigen"
 using namespace std;
 template<typename T>
 class Tensor {
 private:
-    vector<vector<T>> data;
-    vector<vector<T>> grad;
+    vector<T> data;
+    vector<T> grad;
     vector<int> dimensions;
 
     size_t rows() const { return data.size(); }
@@ -29,70 +30,33 @@ private:
         return result;
     }
 
-
-public:
-    Tensor(const vector<vector<T>>& rawData) {
-        data = rawData;
-        grad = vector<vector<T>>(data.size(), vector<T>(data[0].size(), 0));
+    void getDimensions(const T& vec, vector<size_t>& dims) {
+        dims.push_back(vec.size());
+        if (!vec.empty() && vec[0].size() > 0) {
+            getDimensions(vec[0], dims);
+        }
     }
 
 
-    Tensor operator+(const Tensor& other) const {
-        if (rows() != other.rows() || cols() != other.cols()) {
-            throw invalid_argument("Dimension mismatch for addition");
-        }
+public:
+    Tensor(const vector<T>& rawData) {
+        this -> data = rawData;
+        this -> dimensions = getDimensions(rawData);
+        this -> grad = constructRecursive(this -> dimensions, 0);
+    }
 
-        vector<vector<T>> result(rows(), vector<T>(cols()));
-        for (size_t i = 0; i < rows(); ++i) {
-            for (size_t j = 0; j < cols(); ++j) {
-                result[i][j] = data[i][j] + other.data[i][j];
-            }
-        }
-        return Tensor(result);
+    Tensor operator+(const Tensor& other) const {
+
     }
 
     Tensor operator-(const Tensor& other) const {
-        if (!sameShape(this->data, other.data)) {
-            throw invalid_argument("Dimension mismatch for subtraction");
-        }
 
-        vector<vector<T>> result(data.size());
-        for (size_t i = 0; i < data.size(); ++i) {
-            result[i].resize(data[i].size());
-            for (size_t j = 0; j < data[i].size(); ++j) {
-                result[i][j] = data[i][j] - other.data[i][j];
-            }
-        }
-        return Tensor(result);
     }
 
     Tensor operator*(const Tensor& other) const {
-        if (!sameShape(this->data, other.data)) {
-            throw invalid_argument("Dimension mismatch for multiplication");
-        }
 
-        vector<vector<T>> result(data.size());
-        for (size_t i = 0; i < data.size(); ++i) {
-            result[i].resize(data[i].size());
-            for (size_t j = 0; j < data[i].size(); ++j) {
-                result[i][j] = data[i][j] * other.data[i][j];
-            }
-        }
-        return Tensor(result);
     }
 
-    Tensor(const vector<int>& size) {
-        dimensions = size;
-        int totalSize = 1;
-        for (int dim : size) {
-            totalSize *= dim;
-        }
-        data = vector<T>(totalSize, 0);
-    }
-
-    vector<T> gradient() {
-        return this -> grad;
-    }
 
 };
 

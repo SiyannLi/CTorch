@@ -3,5 +3,5 @@
 *.iml
 *.ninja
 cmake-build-debug
-/Eigen
+/Eigen/*
 
