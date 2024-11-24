@@ -6,6 +6,4 @@
 cmake-build-debug
 /eigen-3.4.0
 .vscode
-/Eigen
 /build
-.gitignore
