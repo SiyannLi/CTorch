@@ -1,6 +1,9 @@
 #include <iostream>
+#include "Data/DataLoader.h"
+#include "Data/DataSet.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    DataSet minstdata;
+    minstdata.readMnistData();
     return 0;
 }

@@ -12,7 +12,8 @@ void DataSet::readMnistTrainLable()
 {
     label = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
     std::ifstream ifsLable;
-    ifsLable.open("./datasets/FashionMNIST/raw/train-labels-idx1-ubyte", std::ios::in | std::ios::binary);
+    ifsLable.open("/Users/liuyuheng/CLionProjects/CTorch/datasets/FashionMNIST/train-labels.idx1-ubyte", std::ios::in | std::ios::binary);
+
     unsigned char bytes[8];
     ifsLable.read((char *)bytes, 8);
     uint32_t magic = (uint32_t)((bytes[0] << 24) |
@@ -23,7 +24,7 @@ void DataSet::readMnistTrainLable()
                               (bytes[5] << 16) |
                               (bytes[6] << 8) |
                               bytes[7]);
-    // printf("MnistTrainLable %d %d \n", magic, num);
+    //printf("MnistTrainLable %d %d \n", magic, num);
     while (!ifsLable.eof())
     {
         unsigned char byte;
@@ -44,7 +45,7 @@ void DataSet::readMnistTestLable()
 {
     label = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
     std::ifstream ifsLable;
-    ifsLable.open("./datasets/FashionMNIST/raw/t10k-labels-idx1-ubyte", std::ios::in | std::ios::binary);
+    ifsLable.open("/Users/liuyuheng/CLionProjects/CTorch/datasets/FashionMNIST/t10k-labels.idx1-ubyte", std::ios::in | std::ios::binary);
     unsigned char bytes[8];
     ifsLable.read((char *)bytes, 8);
     uint32_t magic = (uint32_t)((bytes[0] << 24) |
@@ -75,7 +76,7 @@ void DataSet::readMnistTestLable()
 void DataSet::readMnistTrainImage()
 {
     std::ifstream ifsLable;
-    ifsLable.open("./datasets/FashionMNIST/raw/train-images-idx3-ubyte", std::ios::in | std::ios::binary);
+    ifsLable.open("/Users/liuyuheng/CLionProjects/CTorch/datasets/FashionMNIST/train-images.idx3-ubyte", std::ios::in | std::ios::binary);
     unsigned char bytes[16];
     ifsLable.read((char *)bytes, 16);
     uint32_t magic = (uint32_t)((bytes[0] << 24) |
@@ -116,7 +117,7 @@ void DataSet::readMnistTrainImage()
 void DataSet::readMnistTestImage()
 {
     std::ifstream ifsLable;
-    ifsLable.open("./datasets/FashionMNIST/raw/t10k-images-idx3-ubyte", std::ios::in | std::ios::binary);
+    ifsLable.open("/Users/liuyuheng/CLionProjects/CTorch/datasets/FashionMNIST/t10k-images.idx3-ubyte", std::ios::in | std::ios::binary);
     unsigned char bytes[16];
     ifsLable.read((char *)bytes, 16);
     uint32_t magic = (uint32_t)((bytes[0] << 24) |
