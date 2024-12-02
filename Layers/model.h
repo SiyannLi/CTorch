@@ -17,6 +17,9 @@ class Model{
     /// @return 
     virtual Eigen::VectorXd forward(const Eigen::VectorXd& input, const std::string& activation = "") = 0;
 
+    
+    virtual Eigen::VectorXd backward(const Eigen::VectorXd& dout, const std::string& activation = "", double learning_rate = 0.0001) = 0;
+    
     virtual void details() const{
         std::cout << "Generic model." <<std::endl; 
     }

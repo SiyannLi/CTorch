@@ -3,8 +3,8 @@
 // Edited by Zhenjiang_Li on 2024/11/23
 //
 
-#ifndef RELU_H
-#define RELU_H
+#ifndef ACTIVATION_H
+#define ACTIVATION_H
 
 #include <iostream>
 #include <Eigen>
@@ -57,4 +57,4 @@ public:
     }
 };
 
-#endif // RELU_H
+#endif // ACTIVATION_H

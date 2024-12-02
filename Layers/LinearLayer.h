@@ -12,7 +12,7 @@
 #include <cmath>
 #include "activation.h"
 #include "model.h"
-#include "Tensor.h"
+// #include "Tensor.h"
 
 class LinearLayer : public Model {
 public:
@@ -49,6 +49,9 @@ public:
     /// @return Bias vector . Type Eigen::VectorXd
     Eigen::MatrixXd getBias();
     
+    
+    Eigen::VectorXd backward(const Eigen::VectorXd& dout, const std::string& activation, double learning_rate_ = 0.0001);
+    
     /// @brief print details of layers
     void details() const override {
         std::cout << "Linear Layer: Input size = " << input_size_ << ", Output size = " << output_size_ << std::endl;
@@ -58,6 +61,7 @@ public:
 private:
     int input_size_;              // Input size
     int output_size_;             // Output size
+    double learning_rate_;
     Eigen::MatrixXd weights_;     // Weights matrix
     Eigen::VectorXd bias_;        // Bias vector
     Eigen::VectorXd input_;       // Store the last input for backward
