@@ -1,4 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /Users/liuyuheng/CLionProjects/CTorch -B /Users/liuyuheng/CLionProjects/CTorch/cmake-build-debug
--- Configuring done (0.2s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/liuyuheng/CLionProjects/CTorch/cmake-build-debug
