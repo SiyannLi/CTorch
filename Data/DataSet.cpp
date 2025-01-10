@@ -186,8 +186,8 @@ void DataSet::readMnistData()
     readMnistTrainImage();
     readMnistTestImage();
     readMnistTestLable();
-    printf("train_image = %d train_lable = %d \n", train_input.size(), train_output.size());
-    printf("test_image = %d test_lable = %d \n", test_input.size(), test_output.size());
+    printf("train_image = %ld train_lable = %ld \n", train_input.size(), train_output.size());
+    printf("test_image = %ld test_lable = %ld \n", test_input.size(), test_output.size());
 }
 
 DataSet::~DataSet()

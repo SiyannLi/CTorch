@@ -9,6 +9,7 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <cstdint>
 
 class DataSet {
 private:
