@@ -50,8 +50,9 @@ public:
     Eigen::MatrixXd getBias();
     
     
-    Eigen::VectorXd backward(const Eigen::VectorXd& dout, const std::string& activation, double learning_rate_ = 0.0001);
-    
+    Eigen::VectorXd backward(const Eigen::VectorXd& dout, const std::string& activation);
+    void update(double learning_rate_ = 0.0001);
+
     /// @brief print details of layers
     void details() const override {
         std::cout << "Linear Layer: Input size = " << input_size_ << ", Output size = " << output_size_ << std::endl;
@@ -66,6 +67,8 @@ private:
     Eigen::VectorXd bias_;        // Bias vector
     Eigen::VectorXd input_;       // Store the last input for backward
     Eigen::VectorXd output_;      // Store the last output for backward
+    Eigen::VectorXd dbias_;
+    Eigen::MatrixXd dweights_;
 
     void xavier_uniform(Eigen::MatrixXd& weights, int fan_in, int fan_out);
     void kaiming_uniform(Eigen::MatrixXd& weights, int fan_in);

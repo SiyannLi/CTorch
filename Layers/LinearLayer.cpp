@@ -81,7 +81,7 @@ Eigen::VectorXd LinearLayer::forward(const Eigen::VectorXd& input, const std::st
 
 
 // Backward propagation with learning rate
-Eigen::VectorXd LinearLayer::backward(const Eigen::VectorXd& dout, const std::string& activation, double learning_rate_) {
+Eigen::VectorXd LinearLayer::backward(const Eigen::VectorXd& dout, const std::string& activation) {
     // Gradient w.r.t the input (initially no activation applied)
     Eigen::VectorXd dinput(input_size_);
     dinput = weights_.transpose() * dout;  // Calculate gradient w.r.t input before activation
@@ -104,21 +104,20 @@ Eigen::VectorXd LinearLayer::backward(const Eigen::VectorXd& dout, const std::st
     }
 
     // Gradient w.r.t the bias
-    Eigen::VectorXd dbias = dout;
-
+    dbias_ = dout;
     // Gradient w.r.t the weights (using the outer product of dout and input)
-    Eigen::MatrixXd dweights = dout * input_.transpose();
+    dweights_ = dout * input_.transpose();
 
-    // Update weights and biases using the gradients
-    weights_ -= learning_rate_ * dweights;  // Update weights using the learning rate
-    bias_ -= learning_rate_ * dbias;  // Update biases using the learning rate
+
 
 
     return dinput;  // Return gradient w.r.t input to propagate it to the previous layer
 }
-
-
-
+void LinearLayer::update(double learning_rate_) {
+    // Update weights and biases using the gradients
+    weights_ -= learning_rate_ * dweights_;  // Update weights using the learning rate
+    bias_ -= learning_rate_ * dbias_;  // Update biases using the learning rate
+}
 
 
 // // Backward propagation (stub, needs implementation)

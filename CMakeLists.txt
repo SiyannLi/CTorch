@@ -1,33 +1,37 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.28)
 project(CTorch)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
-include_directories(.)
-include_directories(Data)
-include_directories(DataType)
-include_directories(Eigen)
-include_directories(Function)
-include_directories(Layers)
-include_directories(Optimizer)
+include_directories(
+        # ${CMAKE_SOURCE_DIR}/DataType
+        # ${CMAKE_SOURCE_DIR}/Data
+        ${CMAKE_SOURCE_DIR}/Optimizer
+        ${CMAKE_SOURCE_DIR}/Layers
+       ${CMAKE_SOURCE_DIR}/Eigen
+        ${CMAKE_SOURCE_DIR}/
+)
 
-add_executable(CTorch
-    Data/DataLoader.cpp
-    Data/DataLoader.h
-    Data/DataSet.cpp
-    Data/DataSet.h
-    Function/LossFunction.h
-    Layers/activation.cpp
-    Layers/activation.h
-    Layers/ConvolutionLayer.cpp
-    Layers/ConvolutionLayer.h
-    Layers/LinearLayer.cpp
-    Layers/LinearLayer.h
-    Layers/model.cpp
-    Layers/model.h
-    Layers/Module.h
-    Optimizer/Adam.cpp
-    Optimizer/Adam.h
-    Optimizer/Optimizer.h
-    main.cpp
-    mymodel.h)
+add_executable(CTorch main.cpp
+        # DataType/Tensor.cpp
+        Layers/LinearLayer.cpp
+        Layers/LinearLayer.h
+        Layers/ConvolutionLayer.cpp
+        Layers/ConvolutionLayer.h
+        Layers/model.h
+        Layers/model.cpp
+        Optimizer/Adam.cpp
+        Optimizer/Adam.h
+        # DataType/Tensor.cpp
+        # DataType/Tensor.h
+        Data/DataLoader.cpp
+        Data/DataLoader.h
+        Data/DataSet.cpp
+        Data/DataSet.h
+        mymodel.h
+        Optimizer/Optimizer.h
+        Layers/Module.h
+        Function/LossFunction.h
+        Function/CrossEntropy.cpp
+        Function/CrossEntropy.h
+        Network/Network.h)

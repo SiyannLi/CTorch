@@ -1,69 +1,62 @@
-#include "LinearLayer.h"
 #include <iostream>
-#include <Eigen>
-
-#include "mymodel.h"
+#include <vector>
+#include <memory>
 #include <Eigen/Dense>
 
-int main() {
+// Base class for a layer
+class Model {
+public:
+    virtual ~Model() = default;
+    virtual void printInfo() const = 0;
+};
 
-    MyModel model;
+// Derived class for a linear layer
+class LinearLayer : public Model {
+private:
+    int inputSize_;
+    int outputSize_;
+public:
+    LinearLayer(int inputSize, int outputSize)
+        : inputSize_(inputSize), outputSize_(outputSize) {}
 
-
-    model.details();
-
-
-    Eigen::VectorXd input(10);
-    input.setRandom();
-
-
-    Eigen::VectorXd output = model.forward(input);
-
-
-    std::cout << "Final Output: " << output.transpose() << std::endl;
-
-    return 0;
-}
-
-/*
-void debug_output(const Eigen::VectorXd& input, LinearLayer& layer) {
-    // 打印输入
-    std::cout << "Input:\n" << input << std::endl;
-
-    // 前向传播
-    Eigen::VectorXd output = layer.forward(input);
-
-    // 打印输出
-    std::cout << "Output:\n" << output << std::endl;
-}
+    void printInfo() const override {
+        std::cout << "Linear Layer: " << inputSize_ << " -> " << outputSize_ << std::endl;
+    }
+};
 
 int main() {
-    int input_size = 3;
-    int output_size = 2;
+    // Define the original net_layer without input/output sizes
+    Eigen::VectorXd net_layer(2);
+    net_layer << 50, 30; // Hidden layers only
 
-    // 创建线性层，使用 Xavier 初始化
-    LinearLayer layer(input_size, output_size, "xavier_uniform");
+    // Define input and output sizes
+    int inputSize = 10;  // Example input size
+    int outputSize = 10; // Example output size
 
-    // 打印权重和偏置
-    std::cout << "Initialized Weights:\n" << layer.getWeights() << std::endl;
-    std::cout << "Initialized Bias:\n" << layer.getBias() << std::endl;
+    // Add input and output sizes to net_layer
+    Eigen::VectorXd updated_net_layer(net_layer.size() + 2);
+    updated_net_layer[0] = inputSize; // First layer (input)
+    updated_net_layer.tail(net_layer.size()) = net_layer; // Hidden layers
+    updated_net_layer[updated_net_layer.size() - 1] = outputSize; // Last layer (output)
 
-    // 定义多个输入
-    std::vector<Eigen::VectorXd> inputs = {
-        (Eigen::VectorXd(3) << 1.0, 2.0, 3.0).finished(),
-        (Eigen::VectorXd(3) << 0.5, -1.0, 0.0).finished(),
-        (Eigen::VectorXd(3) << -1.0, 0.5, 2.0).finished()
-    };
+    // Print the updated network structure
+    std::cout << "Updated net_layer: " << updated_net_layer.transpose() << std::endl;
 
-    // 遍历输入并进行前向传播
-    for (size_t i = 0; i < inputs.size(); ++i) {
-        std::cout << "Case " << i + 1 << ":" << std::endl;
-        debug_output(inputs[i], layer);
-        std::cout << "-------------------" << std::endl;
+    // Vector to hold layers
+    std::vector<std::unique_ptr<Model>> layers_;
+
+    // Construct layers based on updated_net_layer
+    for (int i = 0; i < updated_net_layer.size() - 1; ++i) {
+        int inputSize = updated_net_layer[i];
+        int outputSize = updated_net_layer[i + 1];
+        layers_.emplace_back(std::make_unique<LinearLayer>(inputSize, outputSize));
+    }
+
+    // Print layer information
+    std::cout << "Network structure:" << std::endl;
+    for (const auto& layer : layers_) {
+        layer->printInfo();
     }
 
     return 0;
 }
-
-
-*/
