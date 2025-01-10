@@ -37,20 +37,24 @@ void saveLogs(std::string path, std::vector<T> logs)
     }
 }
 
-template <typename T>
-void shuffleData(T &train_input, T &train_output)
+void shuffleData(Eigen::MatrixXd& train_input, Eigen::MatrixXd& train_output)
 {
-    int len = train_input.size();
-    int num = len / 16;
+    int len = train_input.rows();
+    int num = len / 4;
+    srand(static_cast<unsigned int>(time(0)));
     while (num--)
     {
-        int p1 = ((double)rand() / RAND_MAX) * len;
-        int p2 = ((double)rand() / RAND_MAX) * len;
+        int p1 = rand() % len;
+        int p2 = rand() % len;
         if (p1 >= len || p2 >= len)
         {
             continue;
         }
-        std::swap(train_input[p1], train_input[p2]);
-        std::swap(train_output[p1], train_output[p2]);
+        Eigen::VectorXd temp = train_input.row(p1);
+        train_input.row(p1) = train_input.row(p2);
+        train_input.row(p2) = temp;
+        temp = train_output.row(p1);
+        train_output.row(p1) = train_output.row(p2);
+        train_output.row(p2) = temp;
     }
 }

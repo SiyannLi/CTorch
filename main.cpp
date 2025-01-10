@@ -13,8 +13,9 @@ int main() {
     minstdata.readMnistData();
     Eigen::MatrixXd train_input = minstdata.getTrainInput();
     Eigen::MatrixXd train_output = minstdata.getTrainOutput();
-    minstdata.printDigit(train_input.row(0),0);
-    std::cout<<train_output.row(0)<<std::endl;
+    shuffleData(train_input,train_output);
+    minstdata.printDigit(train_input.row(10),0);
+    std::cout<<train_output.row(10)<<std::endl;
 
 
     // Model example

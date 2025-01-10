@@ -6,10 +6,13 @@
 #ifndef DATALOADER_H
 #define DATALOADER_H
 
+#include <cstdlib>  // For rand() and srand()
+#include <ctime>    // For time()
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <fstream>
+#include <Eigen>
 
 template <typename T>
 void printData(T t);
@@ -20,7 +23,6 @@ int maxIndex(T t);
 template <typename T>
 void saveLogs(std::string path, std::vector<T> logs);
 
-template <typename T>
-void shuffleData(T &train_input, T &train_output);
+void shuffleData(Eigen::MatrixXd &train_input, Eigen::MatrixXd &train_output);
 
 #endif //DATALOADER_H
