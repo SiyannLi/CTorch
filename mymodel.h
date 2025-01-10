@@ -11,7 +11,7 @@
 #include "model.h"
 #include "LinearLayer.h"
 
-class MyModel : public Model{
+class MyModel {
 public:
     MyModel() {
         layers_.emplace_back(std::make_unique<LinearLayer>(10,50));
@@ -19,7 +19,7 @@ public:
         layers_.emplace_back(std::make_unique<LinearLayer>(30,10));
     }
 
-    Eigen::VectorXd forward(const Eigen::VectorXd& input, const std::string& activation = "") override {
+    Eigen::VectorXd forward(const Eigen::VectorXd& input, const std::string& activation = "")  {
         Eigen::VectorXd x = input;
         for(const auto& layer : layers_){
             x = layer->forward(x, "sigmoid");
@@ -27,7 +27,7 @@ public:
         std::cout << "Output: " << x.transpose() << std::endl;
         return x;
     }
-    void details() const override {
+    void details() const  {
         std::cout << "MyModel:" << std::endl;
         for (const auto& layer : layers_) {
             layer->details();
