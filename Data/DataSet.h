@@ -33,8 +33,8 @@ public:
 
     Eigen::MatrixXd getNormalizedData(Eigen::MatrixXd);
 
-    Eigen::MatrixXd getInput();
-    Eigen::MatrixXd getOutput();
+    Eigen::MatrixXd getTrainInput();
+    Eigen::MatrixXd getTrainOutput();
 
     Eigen::MatrixXd getTestInput();
     Eigen::MatrixXd getTestOutput();

@@ -11,8 +11,10 @@ int main() {
     /// load datatset
     DataSet minstdata;
     minstdata.readMnistData();
-    Eigen::MatrixXd test_input = minstdata.getTestInput();
-    minstdata.printDigit(test_input.row(0),0);
+    Eigen::MatrixXd train_input = minstdata.getTrainInput();
+    Eigen::MatrixXd train_output = minstdata.getTrainOutput();
+    minstdata.printDigit(train_input.row(0),0);
+    std::cout<<train_output.row(0)<<std::endl;
 
 
     // Model example

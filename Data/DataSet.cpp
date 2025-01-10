@@ -199,12 +199,12 @@ DataSet::~DataSet()
 {
 }
 
-Eigen::MatrixXd DataSet::getInput()
+Eigen::MatrixXd DataSet::getTrainInput()
 {
     return train_input;
 }
 
-Eigen::MatrixXd DataSet::getOutput()
+Eigen::MatrixXd DataSet::getTrainOutput()
 {
     return train_output;
 }
