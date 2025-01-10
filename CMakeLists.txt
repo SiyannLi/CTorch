@@ -33,5 +33,7 @@ add_executable(CTorch
         Optimizer/Adam.cpp
         Optimizer/Adam.h
         Optimizer/Optimizer.h
+        Optimizer/SGD.cpp
+        Optimizer/SGD.h
     main.cpp
     mymodel.h)

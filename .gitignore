@@ -8,3 +8,6 @@ cmake-build-debug
 /build
 /Eigen/*
 test.cpp
+main_2.cpp
+main_backup.cpp
+mymodel_2.h

@@ -1,6 +1,15 @@
 #include "SGD.h"
+#include <stdexcept>
 
-// 更新参数
+// 构造函数
+SGD::SGD(MyModel* model, double learning_rate)
+    : model_(model), learning_rate_(learning_rate) {}
+
+// step 方法定义
 void SGD::step() {
-    model.update(this->learning_rate_);
+    if (model_) {
+        model_->update(learning_rate_);
+    } else {
+        throw std::runtime_error("Model is not initialized.");
+    }
 }

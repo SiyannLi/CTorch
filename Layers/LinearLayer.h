@@ -50,9 +50,8 @@ public:
     Eigen::MatrixXd getBias();
     
     
-    Eigen::VectorXd backward(const Eigen::VectorXd& dout, const std::string& activation);
-    Eigen::VectorXd update(double learning_rate_ = 0.0001);
-
+    Eigen::VectorXd backward(const Eigen::VectorXd& dout, const std::string& activation) override;
+    void update(const double& learning_rate) override;
     /// @brief print details of layers
     void details() const override {
         std::cout << "Linear Layer: Input size = " << input_size_ << ", Output size = " << output_size_ << std::endl;

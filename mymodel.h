@@ -26,6 +26,13 @@ public:
         layers_.emplace_back(std::make_unique<LinearLayer>(50,30));
         layers_.emplace_back(std::make_unique<LinearLayer>(30,10));
     }
+
+    MyModel(const MyModel&) = delete;
+    MyModel& operator=(const MyModel&) = delete;
+
+
+    MyModel(MyModel&&) noexcept = default;
+    MyModel& operator=(MyModel&&) noexcept = default;
     // Forward pass of the model.
     // Applies each layer in sequence with the specified activation function.
     // @param input: Input vector to the model.
@@ -58,6 +65,12 @@ public:
         std::cout << "Gradients of last layer: " << grad.transpose() << std::endl;
         return grad;  // return the gradient of last layer
 
+    }
+    void update(const double& learning_rate) override {
+        for (auto& layer : layers_) {
+            layer->update(learning_rate);
+        }
+        std::cout << "Weights updated with learning rate: " << learning_rate << std::endl;
     }
 
     void details() const override {

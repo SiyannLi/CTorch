@@ -113,11 +113,11 @@ Eigen::VectorXd LinearLayer::backward(const Eigen::VectorXd& dout, const std::st
 
     return dinput;  // Return gradient w.r.t input to propagate it to the previous layer
 }
-Eigen::VectorXd LinearLayer::update(double learning_rate_) {
+
+void LinearLayer::update(const double& learning_rate) {
     // Update weights and biases using the gradients
-    weights_ -= learning_rate_ * dweights_;  // Update weights using the learning rate
-    bias_ -= learning_rate_ * dbias_;  // Update biases using the learning rate
-    return weights_.transpose();
+    weights_ -= learning_rate * dweights_;  // Update weights using the learning rate
+    bias_ -= learning_rate * dbias_;  // Update biases using the learning rate
 }
 
 
