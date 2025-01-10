@@ -7,3 +7,5 @@ cmake-build-debug
 .vscode
 /build
 /Eigen/*
+CMakeLists.txt
+test.cpp

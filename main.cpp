@@ -42,7 +42,6 @@ int main() {
     dout.setRandom();  // Random gradient for illustration
 
     // Perform the backward pass with a learning rate of 0.001
-    model.backward(dout);
     std::cout << "End of program"<< std::endl;
 
     return 0;
