@@ -9,13 +9,14 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <Eigen>
 
 class DataSet {
 private:
-    std::vector<std::vector<double>> train_input;
-    std::vector<std::vector<double>> train_output;
-    std::vector<std::vector<double>> test_input;
-    std::vector<std::vector<double>> test_output;
+    Eigen::MatrixXd train_input;
+    Eigen::MatrixXd train_output;
+    Eigen::MatrixXd test_input;
+    Eigen::MatrixXd test_output;
     std::vector<std::string> label;
 
     void readMnistTrainImage();
@@ -28,15 +29,15 @@ public:
 
     void readMnistData();
 
-    void printDigit(std::vector<double>, double mask);
+    void printDigit(Eigen::VectorXd x, double mask);
 
-    std::vector<std::vector<double>> getNormalizedData(std::vector<std::vector<double>>);
+    Eigen::MatrixXd getNormalizedData(Eigen::MatrixXd);
 
-    std::vector<std::vector<double>> getInput();
-    std::vector<std::vector<double>> getOutput();
+    Eigen::MatrixXd getInput();
+    Eigen::MatrixXd getOutput();
 
-    std::vector<std::vector<double>> getTestInput();
-    std::vector<std::vector<double>> getTestOutput();
+    Eigen::MatrixXd getTestInput();
+    Eigen::MatrixXd getTestOutput();
 
     ~DataSet();
 };
