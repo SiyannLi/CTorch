@@ -11,11 +11,11 @@ int main() {
     /// load datatset
     DataSet minstdata;
     minstdata.readMnistData();
-    std::vector<std::vector<double>> test_input = minstdata.getTestInput();
-    minstdata.printDigit(test_input[0],0);
+    Eigen::MatrixXd test_input = minstdata.getTestInput();
+    minstdata.printDigit(test_input.row(0),0);
 
 
-    /// Model example
+    // Model example
     // Create an instance of MyModel
     MyModel model;
     std::cout << "Model initalized!"<< std::endl;

@@ -25,7 +25,9 @@ void DataSet::readMnistTrainLable()
                               (bytes[5] << 16) |
                               (bytes[6] << 8) |
                               bytes[7]);
-    //printf("MnistTrainLable %d %d \n", magic, num);
+    train_output.resize(num,10);
+    train_output.setZero();
+    int cnt = 0;
     while (!ifsLable.eof())
     {
         unsigned char byte;
@@ -35,9 +37,8 @@ void DataSet::readMnistTrainLable()
             break;
         }
         int pos = (unsigned int)byte;
-        std::vector<double> y(10, 0.0);
-        y[pos] = 1.0;
-        train_output.push_back(y);
+        train_output(cnt,pos) = 1;
+        cnt++;
     }
     ifsLable.close();
 }
@@ -57,7 +58,10 @@ void DataSet::readMnistTestLable()
                               (bytes[5] << 16) |
                               (bytes[6] << 8) |
                               bytes[7]);
-    // printf("MnistTestLable %d %d \n", magic, num);
+
+    test_output.resize(num,10);
+    test_output.setZero();
+    int cnt = 0;
     while (!ifsLable.eof())
     {
         unsigned char byte;
@@ -67,9 +71,8 @@ void DataSet::readMnistTestLable()
             break;
         }
         int pos = (unsigned int)byte;
-        std::vector<double> y(10, 0.0);
-        y[pos] = 1.0;
-        test_output.push_back(y);
+        test_output(cnt,pos) = 1;
+        cnt++;
     }
     ifsLable.close();
 }
@@ -96,21 +99,22 @@ void DataSet::readMnistTrainImage()
                                (bytes[13] << 16) |
                                (bytes[14] << 8) |
                                bytes[15]);
-    // printf("MnistTrainImage %d %d %d %d\n", magic, num, rows, cols);
-    while (!ifsLable.eof())
+    //printf("MnistTrainImage %d %d %d %d\n", magic, num, rows, cols);
+    train_input.resize(num, (rows * cols));
+    train_input.setZero();
+    int Num = 0;
+    while (!ifsLable.eof() && Num<num)
     {
         int cnt = 0;
-        std::vector<double> x;
         while (cnt < rows * cols && !ifsLable.fail())
         {
             unsigned char byte;
             ifsLable.read((char *)&byte, 1);
             int pix = (unsigned int)byte;
-            x.push_back(pix);
+            train_input(Num,cnt) = pix;
             ++cnt;
         }
-        if (x.size() == rows * cols)
-            train_input.push_back(x);
+        ++Num;
     }
     ifsLable.close();
 }
@@ -138,25 +142,26 @@ void DataSet::readMnistTestImage()
                                (bytes[14] << 8) |
                                bytes[15]);
     // printf("MnistTestImage %d %d %d %d\n", magic, num, rows, cols);
-    while (!ifsLable.eof())
+    test_input.resize(num, (rows * cols));
+    test_input.setZero();
+    int Num = 0;
+    while (!ifsLable.eof() && Num<num)
     {
         int cnt = 0;
-        std::vector<double> x;
         while (cnt < rows * cols && !ifsLable.fail())
         {
             unsigned char byte;
             ifsLable.read((char *)&byte, 1);
             int pix = (unsigned int)byte;
-            x.push_back(pix);
+            test_input(Num,cnt) = pix;
             ++cnt;
         }
-        if (x.size() == rows * cols)
-            test_input.push_back(x);
+        Num++;
     }
     ifsLable.close();
 }
 
-void DataSet::printDigit(std::vector<double> x, double mask)
+void DataSet::printDigit(Eigen::VectorXd x, double mask)
 {
     if (x.size() != 28 * 28)
     {
@@ -186,69 +191,36 @@ void DataSet::readMnistData()
     readMnistTrainImage();
     readMnistTestImage();
     readMnistTestLable();
-    printf("train_image = %ld train_lable = %ld \n", train_input.size(), train_output.size());
-    printf("test_image = %ld test_lable = %ld \n", test_input.size(), test_output.size());
+    printf("train_image = %ld train_lable = %ld \n", train_input.rows(), train_output.rows());
+    printf("test_image = %ld test_lable = %ld \n", test_input.rows(), test_output.rows());
 }
 
 DataSet::~DataSet()
 {
 }
 
-std::vector<std::vector<double>> DataSet::getInput()
+Eigen::MatrixXd DataSet::getInput()
 {
     return train_input;
 }
 
-std::vector<std::vector<double>> DataSet::getOutput()
+Eigen::MatrixXd DataSet::getOutput()
 {
     return train_output;
 }
 
-std::vector<std::vector<double>> DataSet::getTestInput()
+Eigen::MatrixXd DataSet::getTestInput()
 {
     return test_input;
 }
 
-std::vector<std::vector<double>> DataSet::getTestOutput()
+Eigen::MatrixXd DataSet::getTestOutput()
 {
     return test_output;
 }
 
-std::vector<std::vector<double>> DataSet::getNormalizedData(std::vector<std::vector<double>> data)
-{
-    auto getNormalized = [](double d, double min, double max)
-    {
-        if (max == min)
-            return d;
-        return (d - min) / (max - min);
-    };
-
-    if (data.size() == 0)
-    {
-        return data;
-    }
-
-    std::vector<double> maxVec = data[0];
-    std::vector<double> minVec = data[0];
-    for (int i = 0; i < data.size(); ++i)
-    {
-        for (int j = 0; j < maxVec.size(); ++j)
-        {
-            maxVec[j] = std::max(maxVec[j], data[i][j]);
-            minVec[j] = std::min(minVec[j], data[i][j]);
-        }
-    }
-    std::vector<std::vector<double>> x;
-
-    for (int i = 0; i < data.size(); ++i)
-    {
-        std::vector<double> item;
-        for (int j = 0; j < maxVec.size(); ++j)
-        {
-            item.push_back(getNormalized(data[i][j], minVec[j], maxVec[j]));
-        }
-        x.push_back(item);
-    }
-
-    return x;
-}
+// Eigen::MatrixXd DataSet::getNormalizedData(Eigen::MatrixXd data)
+// {
+//     Eigen::MatrixXd data_normalized = data.rowwise() / data.rowwise().norm();
+//     return data_normalized;
+// }
