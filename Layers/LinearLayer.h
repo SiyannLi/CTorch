@@ -51,7 +51,7 @@ public:
     
     
     Eigen::VectorXd backward(const Eigen::VectorXd& dout, const std::string& activation);
-    void update(double learning_rate_ = 0.0001);
+    Eigen::VectorXd update(double learning_rate_ = 0.0001);
 
     /// @brief print details of layers
     void details() const override {

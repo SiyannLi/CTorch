@@ -4,8 +4,8 @@
 #include "LinearLayer.h"
 #include <iostream>
 #include <Eigen>
-#include "mymodel_2.h"
-#include <Eigen/Dense>
+#include "mymodel.h"
+// #include <Eigen/Dense>
 
 int main() {
     /// load datatset

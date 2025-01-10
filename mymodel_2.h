@@ -3,14 +3,14 @@
 // Edited by Zhenjiang_Li on 2024/11/23
 //
 
-#ifndef MYMODEL_H
-#define MYMODEL_H
+#ifndef MYMODEL_2_H
+#define MYMODEL_2_H
 
 #include <vector>
 #include "model.h"
 #include <memory>
 #include "LinearLayer.h"
-#include "CrossEntropy.h"
+#include "Function/CrossEntropy.h"
 
 // MyModel is a class that implements a multi-layer model.
 // It inherits from the base Model class and contains linear layers with specific dimensions.
@@ -60,6 +60,19 @@ public:
 
     }
 
+    Eigen::VectorXd update(double learning_rate)  {
+        Eigen::VectorXd grad;  // init grad inhereted from last layer
+        // Prints the details of the model and its layers.
+        // This function is primarily used for debugging and model introspection.
+        for (int i = layers_.size() - 1; i >= 0; --i) {
+            grad = layers_[i]->update(learning_rate);  // back propagate of each layer
+        }
+
+        std::cout << "Gradients of last layer: " << grad.transpose() << std::endl;
+        return grad;  // return the gradient of last layer
+
+    }
+
     void details() const override {
         std::cout << "MyModel:" << std::endl;
         for (const auto& layer : layers_) {
@@ -76,4 +89,4 @@ private:
 
 
 
-#endif // MYMODEL_H
+#endif // MYMODEL_2_H

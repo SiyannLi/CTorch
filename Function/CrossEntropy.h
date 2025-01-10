@@ -6,11 +6,12 @@
 #include <cmath>
 
 using Eigen::MatrixXd;
+using Eigen::VectorXi;
 
 class CrossEntropy {
 private:
     MatrixXd logits;   // 输入的未归一化得分
-    MatrixXd labels;   // 实际的标签
+    VectorXi labels;   // 实际的类别索引
     MatrixXd softmax;  // Softmax 的输出值
 
     // 计算 softmax
@@ -18,7 +19,7 @@ private:
 
 public:
     // 构造函数
-    CrossEntropy(const MatrixXd& logits, const MatrixXd& labels);
+    CrossEntropy(const MatrixXd& logits, const VectorXi& labels);
 
     // 计算损失值
     double forward();
